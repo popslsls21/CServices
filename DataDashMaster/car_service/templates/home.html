@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CService | Premium Vehicle Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Base Variables */
+        :root {
+            --primary-gold: #d4af37;
+            --dark-gold: #a58e2d;
+            --light-gold: #f2dc9e;
+            --dark-bg: #14151a;
+            --light-bg: #ffffff;
+            --text-light: #ffffff;
+            --text-dark: #14151a;
+            --text-secondary: #6c757d;
+            --card-bg: #ffffff;
+            --border-light: rgba(0, 0, 0, 0.05);
+            --blue-accent: #4361ee;
+            --blue-light: rgba(67, 97, 238, 0.1);
+            --red: #dc3545;
+            --green: #28a745;
+            --yellow: #ffc107;
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+        }
+        
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f5f7;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+        
+        /* Layout */
+        .app-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--dark-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 36px;
+            border-radius: 8px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-items {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-item {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-gold);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .user-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-icons span {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .user-icons span:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 230px;
+            height: 100vh;
+            background: var(--dark-bg);
+            padding: 6rem 1.5rem 1.5rem;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 900;
+            transition: transform 0.3s ease, width 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-group {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-group-title {
+            color: var(--text-light);
+            opacity: 0.6;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-list a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-list a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-list a:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-list a:hover i {
+            color: var(--primary-gold);
+        }
+        
+        .nav-list a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary-gold);
+        }
+        
+        .nav-list a.active i {
+            color: var(--primary-gold);
+        }
+        
+        /* Support Card */
+        .support-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: var(--text-light);
+            margin-top: 2rem;
+        }
+        
+        .support-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-gold);
+        }
+        
+        .support-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .support-card button {
+            width: 100%;
+            padding: 0.7rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .support-card button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 6rem 2rem 2rem;
+            margin-left: 230px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+        
+        /* Dashboard Specific Styles */
+        .page-title {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(20, 21, 26, 0.9) 0%, rgba(30, 31, 37, 0.9) 100%), url('/static/images/maintenance_center_new_background.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            color: var(--text-light);
+        }
+        
+        .welcome-banner h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .welcome-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+        
+        .welcome-banner .car-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--primary-gold);
+        }
+        
+        .premium-button {
+            background: var(--gold-gradient);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .premium-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .stat-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary-gold);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .badge-popular {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--red);
+        }
+        
+        .badge-certified {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--yellow);
+        }
+        
+        .badge-premium {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--green);
+        }
+        
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .service-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .service-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), transparent);
+            color: white;
+            z-index: 1;
+        }
+        
+        .service-card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .service-card-content p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (max-width: 992px) {
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner .car-image {
+                margin-top: 1.5rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.8rem 1rem;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-items {
+                display: none;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 5rem 1.2rem 1.5rem;
+            }
+            
+            .welcome-banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .welcome-banner .car-image {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card-content h3 {
+                font-size: 1.1rem;
+            }
+            
+            .service-card-content p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Vehicle Performance Styles */
+        .performance-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .metric-card {
+            display: flex;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .metric-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .metric-icon i {
+            font-size: 1.3rem;
+        }
+        
+        .metric-icon.excellent {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--green);
+        }
+        
+        .metric-icon.good {
+            background-color: rgba(212, 175, 55, 0.15);
+            color: var(--primary-gold);
+        }
+        
+        .metric-icon.attention {
+            background-color: rgba(255, 193, 7, 0.15);
+            color: var(--yellow);
+        }
+        
+        .metric-icon.warning {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: var(--red);
+        }
+        
+        .metric-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metric-details h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dark);
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+        
+        .metric-trend {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .metric-trend.positive {
+            color: var(--green);
+        }
+        
+        .metric-trend.negative {
+            color: var(--red);
+        }
+        
+        .metric-trend.neutral {
+            color: var(--text-secondary);
+        }
+        
+        .view-details-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/car_service_logo.jpeg" alt="CService Logo">
+            <h1>CService</h1>
+        </div>
+        
+        <button class="mobile-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-items">
+            <a href="/" class="nav-item">Home</a>
+            <a href="/maintenance-centers" class="nav-item">Service Centers</a>
+            <a href="/map" class="nav-item">Map</a>
+            <a href="/chatbot" class="nav-item">AI Diagnostics</a>
+        </div>
+        
+        <div class="user-icons">
+            <span id="notifications"><i class="fas fa-bell"></i></span>
+            <span id="profile"><i class="fas fa-user"></i></span>
+        </div>
+    </header>
+    
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="nav-group">
+                <h3 class="nav-group-title">Main Menu</h3>
+                <ul class="nav-list">
+                    <li><a href="/home" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/vehicle-health"><i class="fas fa-heartbeat"></i> Vehicle Health</a></li>
+                    <li><a href="/chatbot"><i class="fas fa-robot"></i> AI Diagnostics</a></li>
+                    <li><a href="/maintenance-centers"><i class="fas fa-tools"></i> Service Centers</a></li>
+                    <li><a href="/map"><i class="fas fa-map-marker-alt"></i> Interactive Map</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Account</h3>
+                <ul class="nav-list">
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Vehicle Performance</a></li>
+                    <li><a href="#"><i class="fas fa-car"></i> My Vehicles</a></li>
+                </ul>
+            </div>
+            
+            <div class="support-card">
+                <h4>Need Help?</h4>
+                <p>Contact our customer support team for assistance with your premium service.</p>
+                <button onclick="location.href='/chatbot'">Contact Support</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-title">
+                <h2><i class="fas fa-tachometer-alt" style="color: var(--primary-gold); margin-right: 10px;"></i> Dashboard</h2>
+            </div>
+
+            <!-- Welcome Banner -->
+            <div class="welcome-banner animate__animated animate__fadeIn">
+                <div>
+                    <h1>Welcome, Alex</h1>
+                    <p>Your Mercedes-Benz S-Class is due for scheduled maintenance in 5 days. Schedule your appointment today for premium service.</p>
+                    <button class="premium-button">Schedule Service</button>
+                </div>
+                <div class="animate__animated animate__fadeInRight" style="animation-delay: 0.3s;">
+                    <img src="/static/images/IMG-20250413-WA001.jpeg" alt="Mercedes" class="car-image">
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <h3 class="animate__animated animate__fadeIn" style="animation-delay: 0.4s; margin-bottom: 1.5rem;">Vehicle Status</h3>
+            <div class="stats-grid animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
+                <div class="stat-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>38,253</h3>
+                    <p>Odometer (km)</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-oil-can"></i>
+                    <h3>87%</h3>
+                    <p>Oil Life</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-car-battery"></i>
+                    <h3>92%</h3>
+                    <p>Battery Health</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>5</h3>
+                    <p>Days to Next Service</p>
+                </div>
+            </div>
+
+            <!-- Vehicle Performance and Upcoming Service -->
+            <div class="card-grid animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
+                <!-- Vehicle Performance -->
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Vehicle Performance</h3>
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-icon excellent">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="metric-details">
+                                <h4>Fuel Efficiency</h4>
+                                <div class="metric-value">28.5 mpg</div>
+                                <div class="metric-trend positive">
+                                    <i class="fas fa-arrow-up"></i> 3.2% improvement
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon good">
+                                <i class="fas fa-car-battery"></i>
+                            </div>
+                            <div class="metric-details">
+                                <h4>Battery Health</h4>
+                                <div class="metric-value">92%</div>
+                                <div class="metric-trend neutral">
+                                    <i class="fas fa-minus"></i> Stable
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon attention">
+                                <i class="fas fa-oil-can"></i>
+                            </div>
+                            <div class="metric-details">
+                                <h4>Oil Condition</h4>
+                                <div class="metric-value">67%</div>
+                                <div class="metric-trend negative">
+                                    <i class="fas fa-arrow-down"></i> Time for change
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="premium-button view-details-btn">View Detailed Analytics</button>
+                </div>
+                
+                <!-- Upcoming Service -->
+                <div class="card">
+                    <h3><i class="fas fa-calendar-check"></i> Upcoming Service</h3>
+                    <div style="margin-top: 1rem;">
+                        <h4 style="color: var(--primary-gold);">30,000 km Scheduled Maintenance</h4>
+                        <p style="margin: 0.5rem 0; color: var(--text-secondary);"><i class="fas fa-calendar" style="margin-right: 8px;"></i> May 1, 2025</p>
+                        <p style="margin: 0.5rem 0; color: var(--text-secondary);"><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> CService Center - Downtown</p>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <h5 style="font-size: 1rem; color: var(--text-dark);">Service Includes:</h5>
+                            <ul style="list-style: none; padding: 0; margin-top: 0.8rem;">
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Oil and Filter Change
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Brake System Inspection
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Tire Rotation and Alignment
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Fluid Level Check
+                                </li>
+                                <li style="display: flex; align-items: center;">
+                                    <i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Air Filter Replacement
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                            <button class="premium-button" style="flex: 2;">Confirm Appointment</button>
+                            <button style="flex: 1; background: rgba(220, 53, 69, 0.1); color: var(--red); border: 1px solid rgba(220, 53, 69, 0.3); border-radius: 8px; padding: 0.8rem; font-weight: 600; cursor: pointer;">Reschedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Diagnostics & Service Recommendations -->
+            <div class="card-grid animate__animated animate__fadeIn" style="animation-delay: 0.7s; margin-top: 2rem;">
+                <!-- Recent Diagnostics -->
+                <div class="card">
+                    <h3><i class="fas fa-stethoscope"></i> Recent Diagnostics</h3>
+                    <div style="margin-top: 1rem;">
+                        <div style="border-left: 3px solid var(--primary-gold); padding-left: 1rem; margin-bottom: 1rem;">
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Brake System Check</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> April 20, 2025</p>
+                            <p><strong>Result:</strong> Brake pads at 65% - Normal wear</p>
+                        </div>
+                        <div style="border-left: 3px solid var(--green); padding-left: 1rem; margin-bottom: 1rem;">
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Engine Performance Analysis</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> April 15, 2025</p>
+                            <p><strong>Result:</strong> Optimal performance - No issues detected</p>
+                        </div>
+                        <div style="border-left: 3px solid var(--red); padding-left: 1rem; margin-bottom: 1rem;">
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Air Conditioning Check</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> April 10, 2025</p>
+                            <p><strong>Result:</strong> Refrigerant level low - Refill recommended</p>
+                        </div>
+                        
+                        <button class="premium-button" style="width: auto; margin-top: 1rem; padding: 0.6rem 1.5rem; font-size: 0.9rem;">View Full History</button>
+                    </div>
+                </div>
+                
+                <!-- Service Recommendations -->
+                <div class="card">
+                    <h3><i class="fas fa-clipboard-list"></i> Recommended Services</h3>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                            <div>
+                                <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Air Conditioning Service</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">Recommended due to low refrigerant level</p>
+                            </div>
+                            <span class="badge badge-popular">High Priority</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                            <div>
+                                <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Wheel Alignment</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">Due to uneven tire wear pattern</p>
+                            </div>
+                            <span class="badge badge-certified">Medium Priority</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                            <div>
+                                <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Wiper Blade Replacement</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">Current blades showing wear at 20 months</p>
+                            </div>
+                            <span class="badge badge-premium">Low Priority</span>
+                        </div>
+                        
+                        <button class="premium-button" style="width: 100%; margin-top: 1rem;">Schedule Selected Services</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Services -->
+            <h3 class="animate__animated animate__fadeIn" style="animation-delay: 0.8s; margin-top: 2rem;">Premium Services</h3>
+            <div class="card-grid animate__animated animate__fadeIn" style="animation-delay: 0.9s; margin-bottom: 2rem;">
+                <div class="service-card">
+                    <img src="/static/images/IMG-20250413-WA002.jpeg" alt="Premium Detail">
+                    <div class="service-card-content">
+                        <h3>Premium Detailing</h3>
+                        <p>Complete interior & exterior detailing with ceramic coating</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="/static/images/IMG-20250413-WA003.jpeg" alt="Performance Tuning">
+                    <div class="service-card-content">
+                        <h3>Performance Tuning</h3>
+                        <p>Custom ECU tuning for improved power and efficiency</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="/static/images/IMG-20250413-WA004.jpeg" alt="Full Protection">
+                    <div class="service-card-content">
+                        <h3>Full Protection Package</h3>
+                        <p>Paint protection film and window tinting for ultimate protection</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Dropdown -->
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    <h4>Notifications</h4>
+                    <a href="#">Mark all as read</a>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <h5>Service Reminder</h5>
+                        <p>Your vehicle is due for scheduled maintenance</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>Appointment Confirmed</h5>
+                        <p>Your service appointment has been confirmed</p>
+                        <div class="notification-time">Yesterday</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>New Center Added</h5>
+                        <p>A new maintenance center is available near you</p>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <button>View All Notifications</button>
+                </div>
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-header">
+                    <div class="profile-pic">
+                        <img src="/static/images/user-profile.jpg" alt="Profile" onerror="this.src='/static/images/photo_2025-03-31_23-49-16.jpg'">
+                    </div>
+                    <h4>Alex Johnson</h4>
+                    <p>Premium Member</p>
+                </div>
+                <div class="profile-body">
+                    <a href="#" class="profile-link"><i class="fas fa-user"></i> My Profile</a>
+                    <a href="#" class="profile-link"><i class="fas fa-car"></i> My Vehicles</a>
+                    <a href="#" class="profile-link"><i class="fas fa-chart-line"></i> Vehicle Performance</a>
+                    <a href="#" class="profile-link"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="#" class="profile-link"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+                <div class="profile-footer">
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("✅ Page Loaded - Running Dashboard Script");
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('mobile-visible');
+                });
+                
+                // Close sidebar when clicking outside of it
+                document.addEventListener('click', function(event) {
+                    if (!sidebar.contains(event.target) && event.target !== menuToggle) {
+                        sidebar.classList.remove('mobile-visible');
+                    }
+                });
+            }
+            
+            // Notification toggle
+            const notificationBtn = document.getElementById('notifications');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            
+            if (notificationBtn && notificationDropdown) {
+                notificationBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    notificationDropdown.classList.toggle('show');
+                    if (profileDropdown.classList.contains('show')) {
+                        profileDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Profile toggle
+            const profileBtn = document.getElementById('profile');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                    if (notificationDropdown.classList.contains('show')) {
+                        notificationDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                if (notificationDropdown.classList.contains('show')) {
+                    notificationDropdown.classList.remove('show');
+                }
+                if (profileDropdown.classList.contains('show')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+            
+            // Chart.js for service history
+            const serviceCanvas = document.getElementById('serviceChart');
+            if (serviceCanvas) {
+                const ctx = serviceCanvas.getContext('2d');
+                const gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
+                gradientFill.addColorStop(0, 'rgba(212, 175, 55, 0.5)');
+                gradientFill.addColorStop(1, 'rgba(212, 175, 55, 0.05)');
+                
+                const serviceChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+                        datasets: [{
+                            label: 'Service Expenses',
+                            data: [150, 300, 200, 500, 250, 450, 350],
+                            backgroundColor: gradientFill,
+                            borderColor: '#d4af37',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#d4af37',
+                            pointBorderColor: '#1e1f25',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#a0a0a0',
+                                    callback: function(value) {
+                                        return '$' + value;
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#a0a0a0'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: '#14151a',
+                                titleColor: '#d4af37',
+                                bodyColor: '#ffffff',
+                                borderColor: '#d4af37',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Expense: $' + context.parsed.y;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="/static/js/mobile.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>

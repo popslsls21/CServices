@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CService | Premium Service Centers</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="/static/images/car_service_logo.jpeg" alt="CService">
+                <h2>C<span style="font-weight:300">Service</span></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/map"><i class="fas fa-map-marker-alt"></i> Find Centers</a></li>
+                    <li><a href="/maintenance-centers" class="active"><i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="/chatbot"><i class="fas fa-robot"></i> AI Diagnostics</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="help-center">
+                <p>Need Assistance?</p>
+                <button onclick="location.href='/chatbot'">Contact Support</button>
+            </div>            
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <h2><i class="fas fa-tools" style="color: var(--secondary-color);"></i> Service Centers</h2>
+                <div class="user-icons">
+                    <span id="notifications"><i class="fas fa-bell"></i></span>
+                    <span id="profile"><i class="fas fa-user"></i></span>
+                </div>
+            </header>
+
+            <!-- Hero Banner -->
+            <div class="card animate__animated animate__fadeIn" style="background: linear-gradient(135deg, rgba(20, 21, 26, 0.85) 0%, rgba(30, 31, 37, 0.85) 100%), url('/static/images/maintenance_center_new_background.png'); background-size: cover; background-position: center; padding: 2.5rem; text-align: center; margin-bottom: 2rem;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Premium Service Centers</h1>
+                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.5rem; font-size: 1.1rem;">Experience unparalleled service at our luxury maintenance centers. Our certified technicians specialize in high-end vehicles and provide meticulous care using advanced diagnostics and genuine parts.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="button-premium" style="min-width: 200px;">Find Nearest Center</button>
+                    <button style="min-width: 200px; background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 30px; padding: 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Schedule Service</button>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="card animate__animated animate__fadeIn" style="animation-delay: 0.2s; margin-bottom: 2rem;">
+                <h3><i class="fas fa-filter" style="margin-right: 10px;"></i> Filter Service Centers</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <label for="region" style="display: block; margin-bottom: 0.5rem; color: var(--secondary-color); font-weight: 500;">Region</label>
+                        <select id="region" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--primary-color); color: var(--text-primary);">
+                            <option value="">All Regions</option>
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="east">East</option>
+                            <option value="west">West</option>
+                            <option value="central">Central</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="brand" style="display: block; margin-bottom: 0.5rem; color: var(--secondary-color); font-weight: 500;">Specialization</label>
+                        <select id="brand" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--primary-color); color: var(--text-primary);">
+                            <option value="">All Brands</option>
+                            <option value="mercedes">Mercedes-Benz</option>
+                            <option value="bmw">BMW</option>
+                            <option value="audi">Audi</option>
+                            <option value="lexus">Lexus</option>
+                            <option value="porsche">Porsche</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="service" style="display: block; margin-bottom: 0.5rem; color: var(--secondary-color); font-weight: 500;">Service Type</label>
+                        <select id="service" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--primary-color); color: var(--text-primary);">
+                            <option value="">All Services</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="repair">Repairs</option>
+                            <option value="detailing">Detailing</option>
+                            <option value="performance">Performance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rating" style="display: block; margin-bottom: 0.5rem; color: var(--secondary-color); font-weight: 500;">Rating</label>
+                        <select id="rating" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--primary-color); color: var(--text-primary);">
+                            <option value="">Any Rating</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="3">3+ Stars</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button id="applyFilters" class="button-premium" style="width: 100%; margin-top: 0.5rem;">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Centers -->
+            <h3 class="animate__animated animate__fadeIn" style="animation-delay: 0.3s;">Featured Service Centers</h3>
+            <div id="serviceCentersGrid" class="card-grid animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                <!-- Center 1 -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">CService Downtown</h3>
+                        <span class="badge badge-premium">Premium Center</span>
+                    </div>
+                    <div style="position: relative; height: 180px; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <img src="/static/images/IMG-20250413-WA003.jpeg" alt="Downtown Center" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(20, 21, 26, 0.7); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
+                            <i class="fas fa-star"></i> 4.9 (127 reviews)
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--secondary-color); margin-right: 8px;"></i> 123 Luxury Lane, Downtown</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-phone" style="color: var(--secondary-color); margin-right: 8px;"></i> (555) 123-4567</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><i class="fas fa-clock" style="color: var(--secondary-color); margin-right: 8px;"></i> Open: 7:00 AM - 8:00 PM</p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Mercedes</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">BMW</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Audi</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Porsche</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="button-premium" style="flex: 2;">Book Appointment</button>
+                        <button style="flex: 1; background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 0.8rem; font-weight: 600; cursor: pointer;">Details</button>
+                    </div>
+                </div>
+                
+                <!-- Center 2 -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">CService Westside</h3>
+                        <span class="badge badge-certified">Certified</span>
+                    </div>
+                    <div style="position: relative; height: 180px; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <img src="/static/images/IMG-20250413-WA004.jpeg" alt="Westside Center" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(20, 21, 26, 0.7); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
+                            <i class="fas fa-star"></i> 4.7 (98 reviews)
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--secondary-color); margin-right: 8px;"></i> 456 Elite Drive, Westside</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-phone" style="color: var(--secondary-color); margin-right: 8px;"></i> (555) 987-6543</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><i class="fas fa-clock" style="color: var(--secondary-color); margin-right: 8px;"></i> Open: 8:00 AM - 7:00 PM</p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Lexus</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Jaguar</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Land Rover</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="button-premium" style="flex: 2;">Book Appointment</button>
+                        <button style="flex: 1; background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 0.8rem; font-weight: 600; cursor: pointer;">Details</button>
+                    </div>
+                </div>
+                
+                <!-- Center 3 -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">CService Eastside</h3>
+                        <span class="badge badge-popular">Highly Rated</span>
+                    </div>
+                    <div style="position: relative; height: 180px; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <img src="/static/images/IMG-20250413-WA005.jpeg" alt="Eastside Center" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(20, 21, 26, 0.7); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
+                            <i class="fas fa-star"></i> 4.8 (112 reviews)
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--secondary-color); margin-right: 8px;"></i> 789 Premium Blvd, Eastside</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;"><i class="fas fa-phone" style="color: var(--secondary-color); margin-right: 8px;"></i> (555) 567-8901</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><i class="fas fa-clock" style="color: var(--secondary-color); margin-right: 8px;"></i> Open: 7:30 AM - 8:30 PM</p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Mercedes</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Audi</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Ferrari</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--secondary-color); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">Porsche</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="button-premium" style="flex: 2;">Book Appointment</button>
+                        <button style="flex: 1; background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 0.8rem; font-weight: 600; cursor: pointer;">Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Offerings -->
+            <h3 class="animate__animated animate__fadeIn" style="animation-delay: 0.5s; margin-top: 2rem;">Our Premium Services</h3>
+            <div class="card-grid animate__animated animate__fadeIn" style="animation-delay: 0.6s; margin-bottom: 2rem;">
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 60px; height: 60px; background: rgba(212, 175, 55, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-cog" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <h3 style="margin: 0;">Scheduled Maintenance</h3>
+                    </div>
+                    <p style="margin-bottom: 1rem;">Comprehensive maintenance packages tailored to your vehicle's specifications. Our certified technicians use only genuine parts and fluids.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Oil and filter changes
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Brake system inspection
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Multi-point inspection
+                        </li>
+                        <li style="display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Fluid top-ups and checks
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 60px; height: 60px; background: rgba(212, 175, 55, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-car" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <h3 style="margin: 0;">Premium Detailing</h3>
+                    </div>
+                    <p style="margin-bottom: 1rem;">Meticulous detailing services that restore your vehicle's showroom appearance. Our specialists use premium products for lasting results.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Ceramic coating application
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Interior detailing
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Paint correction
+                        </li>
+                        <li style="display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Leather treatment
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 60px; height: 60px; background: rgba(212, 175, 55, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-tachometer-alt" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <h3 style="margin: 0;">Performance Upgrades</h3>
+                    </div>
+                    <p style="margin-bottom: 1rem;">Enhance your vehicle's performance with our expert tuning services. From ECU remapping to exhaust upgrades, we improve power and efficiency.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> ECU tuning
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Suspension upgrades
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Exhaust systems
+                        </li>
+                        <li style="display: flex; align-items: center;">
+                            <i class="fas fa-check" style="color: var(--secondary-color); margin-right: 10px;"></i> Brake upgrades
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Notification Dropdown -->
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    <h4>Notifications</h4>
+                    <a href="#">Mark all as read</a>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <h5>Service Reminder</h5>
+                        <p>Your vehicle is due for scheduled maintenance</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>Appointment Confirmed</h5>
+                        <p>Your service appointment has been confirmed</p>
+                        <div class="notification-time">Yesterday</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>New Center Added</h5>
+                        <p>A new maintenance center is available near you</p>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <button>View All Notifications</button>
+                </div>
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-header">
+                    <div class="profile-pic">
+                        <img src="/static/images/user-profile.jpg" alt="Profile" onerror="this.src='/static/images/photo_2025-03-31_23-49-16.jpg'">
+                    </div>
+                    <h4>Alex Johnson</h4>
+                    <p>Premium Member</p>
+                </div>
+                <div class="profile-body">
+                    <a href="#" class="profile-link"><i class="fas fa-user"></i> My Profile</a>
+                    <a href="#" class="profile-link"><i class="fas fa-car"></i> My Vehicles</a>
+                    <a href="#" class="profile-link"><i class="fas fa-history"></i> Service History</a>
+                    <a href="#" class="profile-link"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="#" class="profile-link"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+                <div class="profile-footer">
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("✅ Page Loaded - Running Service Centers Script");
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('mobile-visible');
+                });
+                
+                // Close sidebar when clicking outside of it
+                document.addEventListener('click', function(event) {
+                    if (!sidebar.contains(event.target) && event.target !== menuToggle) {
+                        sidebar.classList.remove('mobile-visible');
+                    }
+                });
+            }
+            
+            // Notification toggle
+            const notificationBtn = document.getElementById('notifications');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            
+            if (notificationBtn && notificationDropdown) {
+                notificationBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    notificationDropdown.classList.toggle('show');
+                    if (profileDropdown.classList.contains('show')) {
+                        profileDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Profile toggle
+            const profileBtn = document.getElementById('profile');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                    if (notificationDropdown.classList.contains('show')) {
+                        notificationDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                if (notificationDropdown.classList.contains('show')) {
+                    notificationDropdown.classList.remove('show');
+                }
+                if (profileDropdown.classList.contains('show')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+            
+            // Service Centers Filter Functionality
+            const applyFiltersBtn = document.getElementById('applyFilters');
+            const serviceCentersGrid = document.getElementById('serviceCentersGrid');
+            const serviceCards = Array.from(serviceCentersGrid.querySelectorAll('.card'));
+            
+            // Define service center data with attributes for filtering
+            const serviceCenters = [
+                {
+                    element: serviceCards[0],
+                    name: 'CService Downtown',
+                    region: 'central',
+                    brands: ['mercedes', 'bmw', 'audi', 'porsche'],
+                    services: ['maintenance', 'repair', 'detailing', 'performance'],
+                    rating: 4.9
+                },
+                {
+                    element: serviceCards[1],
+                    name: 'CService Westside',
+                    region: 'west',
+                    brands: ['lexus', 'jaguar', 'land rover'],
+                    services: ['maintenance', 'repair', 'detailing'],
+                    rating: 4.7
+                },
+                {
+                    element: serviceCards[2],
+                    name: 'CService Eastside',
+                    region: 'east',
+                    brands: ['mercedes', 'audi', 'ferrari', 'porsche'],
+                    services: ['maintenance', 'performance', 'repair'],
+                    rating: 4.8
+                }
+            ];
+            
+            // Function to apply filters
+            function applyFilters() {
+                const regionFilter = document.getElementById('region').value;
+                const brandFilter = document.getElementById('brand').value;
+                const serviceFilter = document.getElementById('service').value;
+                const ratingFilter = parseFloat(document.getElementById('rating').value) || 0;
+                
+                console.log(`Applying filters: Region: ${regionFilter}, Brand: ${brandFilter}, Service: ${serviceFilter}, Rating: ${ratingFilter}`);
+                
+                // Apply filters to each service center
+                serviceCenters.forEach(center => {
+                    let visible = true;
+                    
+                    // Apply region filter
+                    if (regionFilter && center.region !== regionFilter) {
+                        visible = false;
+                    }
+                    
+                    // Apply brand filter
+                    if (brandFilter && !center.brands.includes(brandFilter)) {
+                        visible = false;
+                    }
+                    
+                    // Apply service filter
+                    if (serviceFilter && !center.services.includes(serviceFilter)) {
+                        visible = false;
+                    }
+                    
+                    // Apply rating filter
+                    if (ratingFilter > 0 && center.rating < ratingFilter) {
+                        visible = false;
+                    }
+                    
+                    // Show or hide the service center
+                    center.element.style.display = visible ? 'block' : 'none';
+                });
+                
+                // Check if any centers are visible
+                const visibleCenters = serviceCenters.filter(center => 
+                    center.element.style.display !== 'none'
+                );
+                
+                // Show message if no centers match filters
+                const noResultsMsg = document.getElementById('noResultsMsg');
+                if (visibleCenters.length === 0) {
+                    if (!noResultsMsg) {
+                        const msg = document.createElement('div');
+                        msg.id = 'noResultsMsg';
+                        msg.style.textAlign = 'center';
+                        msg.style.padding = '2rem';
+                        msg.style.width = '100%';
+                        msg.innerHTML = `
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                            <h3>No Service Centers Found</h3>
+                            <p style="color: var(--text-secondary);">Try adjusting your filters to see more results.</p>
+                            <button id="resetFilters" class="button-premium" style="margin-top: 1rem;">Reset Filters</button>
+                        `;
+                        serviceCentersGrid.appendChild(msg);
+                        
+                        // Add event listener to reset button
+                        document.getElementById('resetFilters').addEventListener('click', resetFilters);
+                    }
+                } else if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+            }
+            
+            // Function to reset filters
+            function resetFilters() {
+                document.getElementById('region').value = '';
+                document.getElementById('brand').value = '';
+                document.getElementById('service').value = '';
+                document.getElementById('rating').value = '';
+                
+                // Show all service centers
+                serviceCenters.forEach(center => {
+                    center.element.style.display = 'block';
+                });
+                
+                // Remove no results message if it exists
+                const noResultsMsg = document.getElementById('noResultsMsg');
+                if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+            }
+            
+            // Add click event listener to apply filters button
+            if (applyFiltersBtn) {
+                applyFiltersBtn.addEventListener('click', applyFilters);
+                console.log("✅ Filter functionality initialized");
+            }
+        });
+    </script>
+    <script src="/static/js/mobile.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>

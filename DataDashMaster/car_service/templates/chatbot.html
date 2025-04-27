@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Car Diagnostics | ChatBot</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="/static/images/car_service_logo.jpeg" alt="Luxury Cars">
+                <h2>Elite<span style="font-weight:300">Cars</span></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/map"><i class="fas fa-map-marker-alt"></i> Find Centers</a></li>
+                    <li><a href="/maintenance-centers"><i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="/chatbot" class="active"><i class="fas fa-robot"></i> AI Diagnostics</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="help-center">
+                <p>Need Assistance?</p>
+                <button onclick="location.href='/chatbot'">Contact Support</button>
+            </div>            
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <h2><i class="fas fa-robot" style="color: var(--secondary-color);"></i> AI Diagnostics Assistant</h2>
+                <div class="user-icons">
+                    <span id="notifications"><i class="fas fa-bell"></i></span>
+                    <span id="profile"><i class="fas fa-user"></i></span>
+                </div>
+            </header>
+
+            <section class="chatbot-container animate__animated animate__fadeIn">
+                <h3>Vehicle Diagnostic Consultation</h3>
+                
+                <div class="vehicle-selector-container animate__animated animate__fadeIn">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="brand"><i class="fas fa-car"></i> Vehicle Brand</label>
+                            <select id="brand" class="form-select animate__animated animate__fadeIn">
+                                <option value="">Select your brand...</option>
+                                <option value="Mercedes">Mercedes-Benz</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Fiat">Fiat</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model"><i class="fas fa-tag"></i> Vehicle Model</label>
+                            <select id="model" class="form-select animate__animated animate__fadeIn">
+                                <option value="">Select your model...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="query"><i class="fas fa-question-circle" style="margin-right: 8px;"></i>Describe Your Issue</label>
+                    <textarea id="query" placeholder="Describe your car issue in detail... (e.g., 'My car makes a grinding noise when braking')" class="animate__animated animate__fadeIn"></textarea>
+                </div>
+
+                <button id="search-btn" class="animate__animated animate__fadeIn">
+                    <i class="fas fa-search" style="margin-right: 8px;"></i> Diagnose Problem
+                </button>
+
+                <div id="response-container" class="animate__animated animate__fadeIn">
+                    <div class="results-header">
+                        <h3><i class="fas fa-stethoscope" style="margin-right: 8px;"></i> Diagnostic Results</h3>
+                        <div class="results-actions">
+                            <button class="icon-button" id="print-results" title="Print results">
+                                <i class="fas fa-print"></i>
+                            </button>
+                            <button class="icon-button" id="expand-results" title="Expand view">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="icon-button" id="download-results" title="Download PDF">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="results" class="enhanced-results"></div>
+                </div>
+            </section>
+
+            <!-- Notification Dropdown -->
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    <h4>Notifications</h4>
+                    <a href="#">Mark all as read</a>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <h5>Service Reminder</h5>
+                        <p>Your vehicle is due for scheduled maintenance</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>Appointment Confirmed</h5>
+                        <p>Your service appointment has been confirmed</p>
+                        <div class="notification-time">Yesterday</div>
+                    </div>
+                    <div class="notification-item">
+                        <h5>New Center Added</h5>
+                        <p>A new maintenance center is available near you</p>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <button>View All Notifications</button>
+                </div>
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-header">
+                    <div class="profile-pic">
+                        <img src="/static/images/user-profile.jpg" alt="Profile" onerror="this.src='/static/images/photo_2025-03-31_23-49-16.jpg'">
+                    </div>
+                    <h4>Alex Johnson</h4>
+                    <p>Premium Member</p>
+                </div>
+                <div class="profile-body">
+                    <a href="#" class="profile-link"><i class="fas fa-user"></i> My Profile</a>
+                    <a href="#" class="profile-link"><i class="fas fa-car"></i> My Vehicles</a>
+                    <a href="#" class="profile-link"><i class="fas fa-history"></i> Service History</a>
+                    <a href="#" class="profile-link"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="#" class="profile-link"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+                <div class="profile-footer">
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/mobile.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("✅ Page Loaded - Running ChatBot Script");
+            
+            // Notification toggle
+            const notificationBtn = document.getElementById('notifications');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            
+            if (notificationBtn && notificationDropdown) {
+                notificationBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    notificationDropdown.classList.toggle('show');
+                    if (profileDropdown.classList.contains('show')) {
+                        profileDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Profile toggle
+            const profileBtn = document.getElementById('profile');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                    if (notificationDropdown.classList.contains('show')) {
+                        notificationDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                if (notificationDropdown.classList.contains('show')) {
+                    notificationDropdown.classList.remove('show');
+                }
+                if (profileDropdown.classList.contains('show')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+            
+            // Car brand to model mapping (expanded with luxury vehicles)
+            const carModels = {
+                "Mercedes": ["S-Class", "E-Class", "C-Class", "GLE", "GLC", "AMG GT", "G-Wagon"],
+                "BMW": ["7 Series", "5 Series", "3 Series", "X5", "X3", "M5", "i8"],
+                "Audi": ["A8", "A6", "A4", "Q7", "Q5", "RS7", "R8"],
+                "Lexus": ["LS", "ES", "RX", "GX", "LX", "LC", "RC F"],
+                "Porsche": ["911", "Panamera", "Cayenne", "Macan", "Taycan", "718 Cayman", "718 Boxster"],
+                "Tesla": ["Model S", "Model 3", "Model X", "Model Y", "Cybertruck", "Roadster"],
+                "Toyota": ["Corolla", "Camry", "RAV4", "Land Cruiser", "Highlander", "Tundra"],
+                "Fiat": ["500", "Panda", "Tipo", "Spider", "500X", "500L"]
+            };
+            
+            // UI Elements
+            const brandSelect = document.getElementById("brand");
+            const modelSelect = document.getElementById("model");
+            const searchBtn = document.getElementById("search-btn");
+            const queryInput = document.getElementById("query");
+            const resultsContainer = document.getElementById("results");
+            const responseContainer = document.getElementById("response-container");
+            
+            // Add animation delay to form elements
+            const animatedElements = document.querySelectorAll('.animate__fadeIn');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${(index * 0.1 + 0.1)}s`;
+            });
+            
+            // Load models dynamically when brand is selected
+            if (brandSelect) {
+                brandSelect.addEventListener("change", function() {
+                    const selectedBrand = brandSelect.value;
+                    modelSelect.innerHTML = '<option value="">Select your model...</option>';
+                    
+                    if (selectedBrand && carModels[selectedBrand]) {
+                        carModels[selectedBrand].forEach(model => {
+                            const option = document.createElement("option");
+                            option.value = model;
+                            option.textContent = model;
+                            modelSelect.appendChild(option);
+                        });
+                    }
+                });
+            }
+            
+            // Typed.js for dynamic placeholder
+            if (queryInput) {
+                setTimeout(() => {
+                    new Typed(queryInput, {
+                        strings: [
+                            "My car won't start in cold weather...",
+                            "I hear a grinding noise when braking...",
+                            "The check engine light is on...",
+                            "My Mercedes is making a clicking sound...",
+                            "The air conditioning isn't cooling properly...",
+                            "My BMW is struggling to accelerate...",
+                            "I smell something burning when driving..."
+                        ],
+                        typeSpeed: 40,
+                        backSpeed: 20,
+                        backDelay: 5000,
+                        attr: 'placeholder',
+                        bindInputFocusEvents: true,
+                        loop: true
+                    });
+                }, 1000);
+            }
+            
+            // Fetch solutions
+            if (searchBtn) {
+                searchBtn.addEventListener("click", async function() {
+                    const query = queryInput.value.trim();
+                    const brand = brandSelect.value;
+                    const model = modelSelect.value;
+                    
+                    if (!query || !brand || !model) {
+                        // Show elegant error message
+                        showNotification("Please describe your issue, select a brand, and a model.", "error");
+                        
+                        // Add shake animation to highlight the missing fields
+                        if (!query) {
+                            queryInput.classList.add("shake-animation");
+                            setTimeout(() => queryInput.classList.remove("shake-animation"), 500);
+                        }
+                        if (!brand) {
+                            brandSelect.classList.add("shake-animation");
+                            setTimeout(() => brandSelect.classList.remove("shake-animation"), 500);
+                        }
+                        if (!model) {
+                            modelSelect.classList.add("shake-animation");
+                            setTimeout(() => modelSelect.classList.remove("shake-animation"), 500);
+                        }
+                        return;
+                    }
+                    
+                    // Show loading indicator
+                    resultsContainer.innerHTML = `
+                        <div class="loading-spinner">
+                            <div class="loading"></div>
+                            <p>Analyzing your vehicle issue...</p>
+                        </div>
+                    `;
+                    responseContainer.style.display = "block";
+                    
+                    try {
+                        const response = await fetch("/search", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ query, brand, model })
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`Server Error: ${response.status}`);
+                        }
+                        
+                        const data = await response.json();
+                        console.log("API Response:", data);
+                        
+                        resultsContainer.innerHTML = ""; // Clear previous results
+                        
+                        // Handle follow-up questions
+                        if (data.follow_up_question) {
+                            const followUpCard = document.createElement("div");
+                            followUpCard.className = "card animate__animated animate__fadeIn";
+                            followUpCard.innerHTML = `
+                                <h4><i class="fas fa-exclamation-circle" style="color: var(--secondary-color); margin-right: 8px;"></i>Additional Information Needed</h4>
+                                <p>${data.follow_up_question}</p>
+                                <button class="button-premium" style="margin-top: 15px; width: auto;">Provide Details</button>
+                            `;
+                            resultsContainer.appendChild(followUpCard);
+                            responseContainer.style.display = "block";
+                            return;
+                        }
+                        
+                        // Handle no results
+                        if (!data.results || !Array.isArray(data.results) || data.results.length === 0) {
+                            const noResults = document.createElement("div");
+                            noResults.className = "card animate__animated animate__fadeIn";
+                            noResults.innerHTML = `
+                                <h4><i class="fas fa-search" style="color: var(--secondary-color); margin-right: 8px;"></i>No Matching Solutions</h4>
+                                <p>No solutions found for your specific issue. Our technical specialists can assist with this unusual problem.</p>
+                                <button class="button-premium" style="margin-top: 15px; width: auto;">Contact Specialist</button>
+                            `;
+                            resultsContainer.appendChild(noResults);
+                            responseContainer.style.display = "block";
+                            return;
+                        }
+                        
+                        // Display results with animation delay
+                        data.results.forEach((item, index) => {
+                            const resultCard = document.createElement("div");
+                            resultCard.className = "card animate__animated animate__fadeIn";
+                            resultCard.style.animationDelay = `${(index * 0.2)}s`;
+                            
+                            // Get severity level and icon
+                            let severityClass = "";
+                            let severityIcon = "";
+                            
+                            if (item.problem.toLowerCase().includes("critical") || 
+                                item.problem.toLowerCase().includes("danger") ||
+                                item.problem.toLowerCase().includes("emergency")) {
+                                severityClass = "badge-popular";
+                                severityIcon = `<i class="fas fa-exclamation-triangle" style="color: #ff5a76; margin-right: 8px;"></i>`;
+                            } else if (item.problem.toLowerCase().includes("warning") ||
+                                      item.problem.toLowerCase().includes("caution")) {
+                                severityClass = "badge-certified";
+                                severityIcon = `<i class="fas fa-exclamation-circle" style="color: #33c58e; margin-right: 8px;"></i>`;
+                            } else {
+                                severityClass = "badge-premium";
+                                severityIcon = `<i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 8px;"></i>`;
+                            }
+                            
+                            resultCard.innerHTML = `
+                                <div class="result-card-header">
+                                    <h4>
+                                        ${severityIcon}${item.problem}
+                                        <span class="badge ${severityClass}">${
+                                            severityClass === "badge-popular" ? "Critical" : 
+                                            severityClass === "badge-certified" ? "Warning" : "Info"
+                                        }</span>
+                                    </h4>
+                                    <div class="result-meta">
+                                        <span class="result-vehicle">${brand} ${model}</span>
+                                        <span class="result-time">diagnosed ${new Date().toLocaleString()}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-content">
+                                    <div class="result-section">
+                                        <h5>Diagnosis:</h5>
+                                        <p>${item.solution}</p>
+                                    </div>
+                                    
+                                    <div class="result-section">
+                                        <h5>Potential Causes:</h5>
+                                        <ul class="causes-list">
+                                            ${generatePotentialCauses(item.problem, severityClass)}
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="result-section">
+                                        <h5>Recommended Action:</h5>
+                                        <p>${generateRecommendation(severityClass)}</p>
+                                    </div>
+                                    
+                                    <div class="result-section">
+                                        <h5>Estimated Cost Range:</h5>
+                                        <div class="cost-range">
+                                            <span class="cost-amount">${generateCostEstimate(item.problem, severityClass)}</span>
+                                            <div class="cost-bar">
+                                                <div class="cost-indicator" style="left: ${generateCostPercentage(severityClass)}%"></div>
+                                            </div>
+                                            <div class="cost-labels">
+                                                <span>Low</span>
+                                                <span>Medium</span>
+                                                <span>High</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-actions">
+                                    <button class="button-premium action-button">
+                                        <i class="fas fa-calendar-check"></i> Schedule Repair
+                                    </button>
+                                    <button class="action-button share-button">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                    <button class="action-button details-button">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                            `;
+                            
+                            resultsContainer.appendChild(resultCard);
+                        });
+                        
+                        responseContainer.style.display = "block";
+                        
+                    } catch (error) {
+                        console.error("Error fetching solutions:", error);
+                        
+                        let errorMessage = "Unable to connect to diagnostic services. Please try again.";
+                        let errorTitle = "Connection Error";
+                        let errorIcon = "exclamation-triangle";
+                        let errorDetails = "Our AI diagnostic service is currently experiencing issues. Our team has been notified.";
+                        
+                        // Check if error is related to Google Gemini API quota
+                        if (error.message && error.message.includes("QUOTA_EXCEEDED")) {
+                            errorMessage = "AI diagnostic service quota reached";
+                            errorTitle = "AI Service Limit Reached";
+                            errorIcon = "clock";
+                            errorDetails = "Our Google Gemini AI diagnostic service has reached its usage limit for the current period. The system is using built-in diagnostics instead. Full AI service will resume shortly.";
+                        }
+                        
+                        // Show error notification
+                        showNotification(errorMessage, "error");
+                        
+                        // Show detailed error card
+                        resultsContainer.innerHTML = `
+                            <div class="card animate__animated animate__fadeIn" style="border-left: 3px solid var(--danger-color);">
+                                <h4><i class="fas fa-${errorIcon}" style="color: var(--danger-color); margin-right: 8px;"></i>${errorTitle}</h4>
+                                <p>${errorDetails}</p>
+                                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                                    <button id="retryBtn" class="button-premium" style="flex: 1;">Retry Connection</button>
+                                    <button id="contactBtn" style="flex: 1; background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 30px; padding: 0.8rem; font-weight: 600; cursor: pointer;">Contact Support</button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Add event listener to the retry button
+                        const retryBtn = document.getElementById("retryBtn");
+                        if (retryBtn) {
+                            retryBtn.addEventListener("click", function() {
+                                showNotification("Retrying connection...");
+                                searchBtn.click(); // Trigger search again
+                            });
+                        }
+                        
+                        // Add event listener to the contact button
+                        const contactBtn = document.getElementById("contactBtn");
+                        if (contactBtn) {
+                            contactBtn.addEventListener("click", function() {
+                                showNotification("Support request submitted. Our team will contact you shortly.");
+                            });
+                        }
+                        
+                        responseContainer.style.display = "block";
+                    }
+                });
+            }
+            
+            // Add notification and animation functions
+            function showNotification(message, type = "info") {
+                const notification = document.createElement('div');
+                notification.className = `notification animate__animated animate__fadeIn ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.remove('animate__fadeIn');
+                    notification.classList.add('animate__fadeOut');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 3000);
+            }
+        });
+        
+        // Helper functions for advanced diagnostic results
+        function generatePotentialCauses(problem, severityClass) {
+            // Dynamically generate potential causes based on the problem and severity
+            const causes = {
+                "badge-popular": [ // Critical issues
+                    "Faulty electrical connections",
+                    "Major component failure",
+                    "Severe internal damage",
+                    "Structural integrity compromised"
+                ],
+                "badge-certified": [ // Warning issues
+                    "Component wear beyond acceptable limits",
+                    "Fluid leakage or contamination",
+                    "Sensor malfunction",
+                    "Calibration issues"
+                ],
+                "badge-premium": [ // Info issues
+                    "Normal wear and tear",
+                    "Minor adjustment needed",
+                    "Routine maintenance required",
+                    "Environmental factors"
+                ]
+            };
+            
+            // Select causes based on severity
+            const selectedCauses = causes[severityClass] || causes["badge-premium"];
+            
+            // Return HTML list items
+            return selectedCauses.map(cause => `<li>${cause}</li>`).join('');
+        }
+        
+        function generateRecommendation(severityClass) {
+            switch(severityClass) {
+                case "badge-popular": // Critical
+                    return "Immediate service required. Please do not drive the vehicle until it has been inspected by a professional technician.";
+                case "badge-certified": // Warning
+                    return "Service recommended within 1-2 weeks. You may continue to drive the vehicle, but monitor the condition closely.";
+                default: // Info
+                    return "Schedule routine maintenance at your convenience. This is not an urgent issue but should be addressed during your next service appointment.";
+            }
+        }
+        
+        function generateCostEstimate(problem, severityClass) {
+            // Generate a cost estimate range based on the problem and severity
+            const baseCosts = {
+                "badge-popular": { min: 500, max: 2500 },
+                "badge-certified": { min: 200, max: 800 },
+                "badge-premium": { min: 50, max: 300 }
+            };
+            
+            const costs = baseCosts[severityClass] || baseCosts["badge-premium"];
+            
+            // Add some randomization within the range
+            const min = costs.min;
+            const max = costs.max;
+            const estimatedCost = Math.floor(min + Math.random() * (max - min));
+            
+            // Format as currency
+            return `$${estimatedCost} - $${Math.floor(estimatedCost * 1.2)}`;
+        }
+        
+        function generateCostPercentage(severityClass) {
+            // Return a percentage for positioning the cost indicator
+            switch(severityClass) {
+                case "badge-popular": // Critical
+                    return 80 + Math.random() * 15; // 80-95%
+                case "badge-certified": // Warning
+                    return 40 + Math.random() * 30; // 40-70%
+                default: // Info
+                    return 5 + Math.random() * 25; // 5-30%
+            }
+        }
+        
+        // Functions for the new result action buttons
+        function handleResultActions() {
+            // Print results
+            document.getElementById('print-results').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Expand view
+            document.getElementById('expand-results').addEventListener('click', function() {
+                document.getElementById('response-container').classList.toggle('expanded-view');
+                
+                // Change icon based on current state
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-expand')) {
+                    icon.classList.remove('fa-expand');
+                    icon.classList.add('fa-compress');
+                    this.setAttribute('title', 'Collapse view');
+                } else {
+                    icon.classList.remove('fa-compress');
+                    icon.classList.add('fa-expand');
+                    this.setAttribute('title', 'Expand view');
+                }
+            });
+            
+            // Download as PDF (simulate)
+            document.getElementById('download-results').addEventListener('click', function() {
+                showNotification('Generating PDF report...', 'info');
+                
+                // Simulate download delay
+                setTimeout(() => {
+                    showNotification('PDF report downloaded successfully!', 'info');
+                }, 1500);
+            });
+        }
+        
+        // Initialize result action buttons when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            handleResultActions();
+        });
+        
+        // Add CSS for notification and animations
+        document.head.insertAdjacentHTML('beforeend', `
+        <style>
+            /* Notification Styles */
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: rgba(20, 21, 26, 0.9);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                border-left: 4px solid #d4af37;
+                max-width: 350px;
+            }
+            
+            .notification.error {
+                border-left-color: #ff4d5f;
+            }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+            }
+            
+            .notification-content i {
+                color: #d4af37;
+                margin-right: 10px;
+                font-size: 1.2rem;
+            }
+            
+            .notification.error .notification-content i {
+                color: #ff4d5f;
+            }
+            
+            /* Shake Animation */
+            .shake-animation {
+                animation: shake 0.5s;
+            }
+            
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            
+            /* Enhanced Results Styling */
+            .enhanced-results {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                margin-top: 15px;
+            }
+            
+            .results-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .results-actions {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .icon-button {
+                background: none;
+                border: none;
+                color: var(--text-color);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .icon-button:hover {
+                background: rgba(212, 175, 55, 0.1);
+                color: var(--secondary-color);
+            }
+            
+            .result-card-header {
+                margin-bottom: 15px;
+            }
+            
+            .result-meta {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8rem;
+                color: var(--muted-text);
+                margin-top: 5px;
+            }
+            
+            .result-vehicle {
+                font-weight: 500;
+            }
+            
+            .result-time {
+                font-style: italic;
+            }
+            
+            .result-content {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .result-section {
+                margin-bottom: 10px;
+            }
+            
+            .result-section h5 {
+                font-size: 0.9rem;
+                color: var(--muted-text);
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+            
+            .causes-list {
+                list-style-type: none;
+                padding-left: 0;
+                margin: 10px 0;
+            }
+            
+            .causes-list li {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 8px;
+                line-height: 1.4;
+            }
+            
+            .causes-list li:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: var(--secondary-color);
+                opacity: 0.7;
+            }
+            
+            .cost-range {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                padding: 15px;
+                position: relative;
+            }
+            
+            .cost-amount {
+                font-weight: 700;
+                font-size: 1.1rem;
+                color: var(--secondary-color);
+                display: block;
+                margin-bottom: 10px;
+            }
+            
+            .cost-bar {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 2px;
+                position: relative;
+                margin-bottom: 5px;
+            }
+            
+            .cost-indicator {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--secondary-color);
+                top: 50%;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            }
+            
+            .cost-labels {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8rem;
+                color: var(--muted-text);
+            }
+            
+            .result-actions {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .action-button {
+                flex: 1;
+                padding: 12px;
+                border-radius: 30px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .share-button {
+                background: rgba(212, 175, 55, 0.15);
+                color: var(--secondary-color);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+            }
+            
+            .details-button {
+                background: transparent;
+                color: var(--text-color);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Expanded view styles */
+            .expanded-view {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1000;
+                background: var(--dark-bg);
+                padding: 30px;
+                overflow-y: auto;
+                animation: expandIn 0.3s ease;
+            }
+            
+            @keyframes expandIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            
+            /* Enhanced Loading Indicator */
+            .loading-spinner {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                text-align: center;
+            }
+            
+            .loading-spinner .loading {
+                width: 50px;
+                height: 50px;
+                border: 3px solid rgba(212, 175, 55, 0.3);
+                border-radius: 50%;
+                border-top-color: #d4af37;
+                animation: spin 1s infinite ease-in-out;
+                margin-bottom: 1rem;
+            }
+            
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            
+            /* Enhanced Mobile Responsiveness */
+            @media (max-width: 768px) {
+                .chatbot-container {
+                    padding: 1rem;
+                    margin: 0.5rem;
+                }
+                
+                .header {
+                    padding: 15px 10px;
+                }
+                
+                .header h1 {
+                    font-size: 1.5rem;
+                }
+                
+                .form-group {
+                    margin-bottom: 1rem;
+                }
+                
+                .form-container {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .form-container > div {
+                    width: 100%;
+                }
+                
+                textarea, select {
+                    padding: 0.8rem;
+                    font-size: 16px; /* Prevents iOS zoom on focus */
+                    width: 100%;
+                }
+                
+                .card {
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                }
+                
+                .notification {
+                    left: 20px;
+                    right: 20px;
+                    max-width: unset;
+                    bottom: 20px;
+                    top: unset;
+                }
+                
+                /* Improve touch targets for mobile */
+                button {
+                    min-height: 44px;
+                    min-width: 44px;
+                }
+                
+                /* Optimize spacing for results */
+                .response-section {
+                    margin-top: 1rem;
+                }
+                
+                /* Adjust badges in mobile view */
+                .badge {
+                    padding: 3px 8px;
+                    font-size: 0.7rem;
+                }
+                
+                /* Improved tap areas for actionable elements */
+                .button-premium, button {
+                    padding: 10px 15px;
+                    margin-top: 10px;
+                }
+                
+                /* Fix mobile menu issues */
+                .navbar-menu {
+                    width: 100%;
+                    position: absolute;
+                    top: 100%;
+                    background-color: var(--dark-bg);
+                    z-index: 100;
+                }
+            }
+        </style>
+    `);
+    </script>
+    <script src="/static/js/mobile.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>

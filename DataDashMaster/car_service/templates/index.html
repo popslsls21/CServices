@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CService | Premium Car Service</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Landing Page Specific Styles */
+        :root {
+            --primary-gold: #d4af37;
+            --dark-gold: #a58e2d;
+            --dark-bg: #14151a;
+            --light-bg: #ffffff;
+            --text-light: #ffffff;
+            --text-dark: #14151a;
+        }
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(20, 21, 26, 0.7), rgba(20, 21, 26, 0.7)), url('/static/images/IMG-20250413-WA0000.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(20, 21, 26, 0.9) 0%, rgba(20, 21, 26, 0.7) 100%);
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: calc(100% - 40px);
+            z-index: 10;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 45px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+        
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            margin: 0;
+            background: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+        
+        .nav-links .auth-btn {
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-left: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-links .auth-btn:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+        
+        .hero-content {
+            max-width: 650px;
+            padding-top: 80px;
+        }
+        
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero-content h2 span {
+            color: var(--primary-gold);
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cta-btn i {
+            margin-right: 10px;
+        }
+        
+        .cta-btn.primary {
+            background: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+            color: var(--dark-bg);
+            border: none;
+        }
+        
+        .cta-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.03) 0%, rgba(212, 175, 55, 0.06) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+            animation: titleShine 2s infinite alternate;
+        }
+        
+        @keyframes titleShine {
+            from { background-position: left; }
+            to { background-position: right; }
+        }
+        
+        .section-title h3:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-gold);
+            border-radius: 1.5px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            z-index: 1;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Feature Tabs */
+        .feature-tabs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-tab {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-tab i {
+            margin-right: 10px;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-tab span {
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-tab:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .feature-tab.active {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.3) 100%);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .feature-tab.active i,
+        .feature-tab.active span {
+            color: var(--primary-gold);
+        }
+        
+        /* Feature Content */
+        .feature-content-container {
+            position: relative;
+            min-height: 420px;
+            overflow: hidden;
+        }
+        
+        .feature-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+        
+        .feature-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            z-index: 1;
+        }
+        
+        .feature-content-inner {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .feature-text {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .feature-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .feature-text h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gold);
+        }
+        
+        .feature-text p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #6c757d;
+            animation: fadeInRight 0.5s ease both;
+            animation-delay: calc(var(--i, 0) * 0.1s);
+        }
+        
+        .feature-list li i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+        }
+        
+        .feature-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+            color: #14151a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        .feature-btn span {
+            margin-right: 8px;
+        }
+        
+        .feature-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        
+        .feature-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        .feature-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(20, 21, 26, 0.9) 0%, rgba(20, 21, 26, 0.8) 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+        
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.7;
+            transition: all 0.5s ease;
+        }
+        
+        .feature-image:hover img {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+        
+        .feature-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-gold);
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .feature-badge span {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .feature-badge small {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        .map-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-badge i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Mobile Responsive for Features */
+        @media (max-width: 992px) {
+            .feature-content-inner {
+                flex-direction: column;
+            }
+            
+            .feature-image {
+                min-height: 300px;
+            }
+            
+            .feature-badge {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .feature-content-container {
+                min-height: 680px;
+            }
+            
+            .feature-text h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .feature-tab {
+                width: calc(50% - 10px);
+                justify-content: center;
+            }
+            
+            .feature-content-container {
+                min-height: 750px;
+            }
+            
+            .feature-text {
+                padding: 30px;
+            }
+            
+            .feature-text h2 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title h3 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .feature-tab {
+                width: 100%;
+            }
+            
+            .feature-content-container {
+                min-height: 800px;
+            }
+            
+            .feature-text {
+                padding: 25px;
+            }
+            
+            .feature-btn {
+                width: 100%;
+            }
+        }
+        
+        /* Authentication Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 21, 26, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .auth-box {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #dc3545;
+        }
+        
+        .auth-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .auth-form .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .auth-form .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-form input:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+            outline: none;
+        }
+        
+        .auth-form .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            fill: #6c757d;
+            transition: fill 0.3s ease;
+        }
+        
+        .auth-form .eye-icon:hover {
+            fill: var(--primary-gold);
+        }
+        
+        .auth-form button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4af37 0%, #f2dc9e 50%, #d4af37 100%);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .auth-form button:hover {
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .auth-form p {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+        
+        .auth-form p a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-form p a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .auth-options button {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-options button i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .auth-options .google i {
+            color: #db4437;
+        }
+        
+        .auth-options .apple i {
+            color: #000000;
+        }
+        
+        .auth-options button:hover {
+            background: #f8f9fa;
+        }
+        
+        .toggle-auth {
+            cursor: pointer;
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content h2 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                background: var(--dark-bg);
+                height: 100vh;
+                width: 250px;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 30px 30px;
+                transition: right 0.3s ease;
+                z-index: 5;
+            }
+            
+            .nav-links.active {
+                right: 0;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links a {
+                margin: 0 0 20px 0;
+                font-size: 1.1rem;
+            }
+            
+            .nav-links .auth-btn {
+                margin: 10px 0 0 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: transparent;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                display: block;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.3rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-btn {
+                width: 100%;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h3 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content {
+                padding-top: 60px;
+            }
+            
+            .auth-box {
+                padding: 30px 20px;
+            }
+            
+            .auth-options {
+                flex-direction: column;
+            }
+            
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="logo">
+                <img src="/static/images/logo.svg" alt="CService Logo" style="height:50px; width:auto;">
+                <h1>CService</h1>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links" id="navLinks">
+                <button class="close-menu" id="closeMenu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="#features">Features</a>
+                <a href="/vehicle-health">Vehicle Health</a>
+                <a href="/maintenance-centers">Service Centers</a>
+                <a href="/chatbot">AI Diagnostics</a>
+                <button class="auth-btn" id="showAuth">Sign In</button>
+            </div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2>Premium <span>Car Service</span> & AI Diagnostics</h2>
+                <p>Experience luxury automotive care with our state-of-the-art AI diagnostic technology. Our advanced system provides accurate solutions for your vehicle issues, connects you with premium service centers, and delivers personalized maintenance recommendations.</p>
+                
+                <div class="cta-buttons">
+                    <a href="/chatbot" class="cta-btn primary">
+                        <i class="fas fa-robot"></i> Try AI Diagnostics
+                    </a>
+                    <a href="/maintenance-centers" class="cta-btn secondary">
+                        <i class="fas fa-map-marker-alt"></i> Find Service Centers
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h3>Premium Features</h3>
+            <p>Experience luxury automotive care with our innovative services</p>
+        </div>
+        
+        <div class="features-container">
+            <!-- Feature Tabs -->
+            <div class="feature-tabs">
+                <div class="feature-tab active" data-tab="ai-diagnostics">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Diagnostics</span>
+                </div>
+                <div class="feature-tab" data-tab="maintenance">
+                    <i class="fas fa-tools"></i>
+                    <span>Premium Maintenance</span>
+                </div>
+                <div class="feature-tab" data-tab="location">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Location Services</span>
+                </div>
+                <div class="feature-tab" data-tab="monitoring">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Vehicle Monitoring</span>
+                </div>
+            </div>
+            
+            <!-- Feature Content -->
+            <div class="feature-content-container">
+                <!-- AI Diagnostics Content -->
+                <div class="feature-content active" id="ai-diagnostics">
+                    <div class="feature-content-inner">
+                        <div class="feature-text">
+                            <h2>Advanced AI Diagnostic System</h2>
+                            <p>Our state-of-the-art AI technology revolutionizes vehicle diagnostics by:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Analyzing symptoms with 98% accuracy</li>
+                                <li><i class="fas fa-check-circle"></i> Providing detailed repair solutions</li>
+                                <li><i class="fas fa-check-circle"></i> Estimating costs before servicing</li>
+                                <li><i class="fas fa-check-circle"></i> Supporting multiple languages</li>
+                            </ul>
+                            <p>Simply describe your vehicle issue, and our AI system will identify potential problems, recommend solutions, and connect you with qualified technicians.</p>
+                            <a href="/chatbot" class="feature-btn">
+                                <span>Try AI Diagnostics</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="feature-image">
+                            <img src="/static/images/ai-diagnostics.svg" alt="AI Diagnostics" style="width:100%; height:auto;">
+                            <div class="feature-badge">
+                                <span>98%</span>
+                                <small>Accuracy</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium Maintenance Content -->
+                <div class="feature-content" id="maintenance">
+                    <div class="feature-content-inner">
+                        <div class="feature-text">
+                            <h2>Premium Maintenance Services</h2>
+                            <p>Connect with our network of certified maintenance centers specializing in luxury vehicles:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Certified technicians for all premium brands</li>
+                                <li><i class="fas fa-check-circle"></i> Digital service history tracking</li>
+                                <li><i class="fas fa-check-circle"></i> OEM parts guarantee</li>
+                                <li><i class="fas fa-check-circle"></i> Priority scheduling for members</li>
+                            </ul>
+                            <p>Schedule appointments, track your maintenance history, and receive reminders for upcoming service needs to keep your vehicle in peak condition.</p>
+                            <a href="/maintenance-centers" class="feature-btn">
+                                <span>Find Service Centers</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="feature-image">
+                            <img src="/static/images/premium-maintenance.svg" alt="Premium Maintenance" style="width:100%; height:auto;">
+                            <div class="feature-badge">
+                                <span>100%</span>
+                                <small>OEM Parts</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Location Services Content -->
+                <div class="feature-content" id="location">
+                    <div class="feature-content-inner">
+                        <div class="feature-text">
+                            <h2>Interactive Location Services</h2>
+                            <p>Our GPS-enabled location services provide comprehensive assistance:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Real-time service center locator</li>
+                                <li><i class="fas fa-check-circle"></i> Turn-by-turn directions</li>
+                                <li><i class="fas fa-check-circle"></i> Instant roadside assistance</li>
+                                <li><i class="fas fa-check-circle"></i> Saved locations for quick access</li>
+                            </ul>
+                            <p>Find the nearest service centers, get precise directions, and contact emergency assistance with just a few taps, ensuring you're never stranded on the road.</p>
+                            <a href="/map" class="feature-btn">
+                                <span>Explore Map Features</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="feature-image">
+                            <img src="/static/images/location-services.svg" alt="Location Services" style="width:100%; height:auto;">
+                            <div class="feature-badge map-badge">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <small>Live GPS</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vehicle Monitoring Content -->
+                <div class="feature-content" id="monitoring">
+                    <div class="feature-content-inner">
+                        <div class="feature-text">
+                            <h2>Real-time Vehicle Monitoring</h2>
+                            <p>Monitor your vehicle's health and performance with advanced analytics:</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Engine performance tracking</li>
+                                <li><i class="fas fa-check-circle"></i> Fuel efficiency optimization</li>
+                                <li><i class="fas fa-check-circle"></i> Predictive maintenance alerts</li>
+                                <li><i class="fas fa-check-circle"></i> Custom performance reports</li>
+                            </ul>
+                            <p>Receive real-time data about your vehicle's condition, get alerts for potential issues before they become serious, and track performance metrics over time.</p>
+                            <a href="/vehicle-health" class="feature-btn">
+                                <span>Monitor Your Vehicle</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="feature-image">
+                            <img src="/static/images/vehicle-monitoring.svg" alt="Vehicle Monitoring" style="width:100%; height:auto;">
+                            <div class="feature-badge">
+                                <span>24/7</span>
+                                <small>Monitoring</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-box">
+            <button class="close-modal" id="closeAuth">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h3 id="authTitle">Sign In</h3>
+            
+            <form class="auth-form" id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <svg id="eyeIcon" class="eye-icon" viewBox="0 0 24 24" onclick="togglePassword()">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                    </svg>
+                </div>
+                <button type="button" onclick="authenticate()">Continue</button>
+                
+                <p>Don't have an account? <a href="#" class="toggle-auth" id="showSignup">Sign Up</a></p>
+                
+                <div class="auth-options">
+                    <button type="button" class="google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="apple">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                </div>
+            </form>
+            
+            <form class="auth-form" id="signupForm" style="display: none;">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="name" placeholder="Full name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="signupEmail" placeholder="Email address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <svg id="signupEyeIcon" class="eye-icon" viewBox="0 0 24 24" onclick="toggleSignupPassword()">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                    </svg>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-car"></i>
+                    <input type="text" id="carBrand" placeholder="Car Brand (e.g. BMW, Audi)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-car-side"></i>
+                    <input type="text" id="carModel" placeholder="Car Model (e.g. 3 Series, A4)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="number" id="carYear" placeholder="Manufacturing Year" required min="1900" max="2025">
+                </div>
+                <button type="button" onclick="registerUser()">Create Account</button>
+                
+                <p>Already have an account? <a href="#" class="toggle-auth" id="showLogin">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.add('active');
+        });
+        
+        document.getElementById('closeMenu').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.remove('active');
+        });
+        
+        // Auth Modal Functions
+        document.getElementById('showAuth').addEventListener('click', function() {
+            document.getElementById('authModal').style.display = 'flex';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('authTitle').textContent = 'Sign In';
+        });
+        
+        document.getElementById('closeAuth').addEventListener('click', function() {
+            document.getElementById('authModal').style.display = 'none';
+        });
+        
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('authTitle').textContent = 'Create Account';
+        });
+        
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('authTitle').textContent = 'Sign In';
+        });
+        
+        // Password Visibility Toggle
+        function togglePassword() {
+            let passField = document.getElementById("password");
+            let eyeIcon = document.getElementById("eyeIcon");
+            
+            if (passField.type === "password") {
+                passField.type = "text";
+                eyeIcon.innerHTML = '<path d="M12 4.5c-4.97 0-9.27 3.11-11 7.5 1.73 4.39 6.03 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6.03-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-4.41-.9c1.03.67 2.26 1.07 3.61 1.07 3.87 0 7-3.13 7-7 0-1.35-.4-2.58-1.07-3.61l-1.42 1.42c.3.74.49 1.54.49 2.19 0 2.76-2.24 5-5 5-1.39 0-2.68-.57-3.61-1.49l-1.42 1.42zm8.99-8.99-1.42-1.42c-.93.93-1.49 2.22-1.49 3.61 0 2.76 2.24 5 5 5 .65 0 1.45-.19 2.19-.49l1.42 1.42c-.93.93-2.22 1.49-3.61 1.49-2.76 0-5-2.24-5-5 0-1.39.57-2.68 1.49-3.61z"/>';
+            } else {
+                passField.type = "password";
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>';
+            }
+        }
+        
+        function toggleSignupPassword() {
+            let passField = document.getElementById("signupPassword");
+            let eyeIcon = document.getElementById("signupEyeIcon");
+            
+            if (passField.type === "password") {
+                passField.type = "text";
+                eyeIcon.innerHTML = '<path d="M12 4.5c-4.97 0-9.27 3.11-11 7.5 1.73 4.39 6.03 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6.03-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-4.41-.9c1.03.67 2.26 1.07 3.61 1.07 3.87 0 7-3.13 7-7 0-1.35-.4-2.58-1.07-3.61l-1.42 1.42c.3.74.49 1.54.49 2.19 0 2.76-2.24 5-5 5-1.39 0-2.68-.57-3.61-1.49l-1.42 1.42zm8.99-8.99-1.42-1.42c-.93.93-1.49 2.22-1.49 3.61 0 2.76 2.24 5 5 5 .65 0 1.45-.19 2.19-.49l1.42 1.42c-.93.93-2.22 1.49-3.61 1.49-2.76 0-5-2.24-5-5 0-1.39.57-2.68 1.49-3.61z"/>';
+            } else {
+                passField.type = "password";
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>';
+            }
+        }
+        
+        // Authentication Functions
+        function authenticate() {
+            console.log("Login attempt");
+            // In a real application, you would validate and send to the server
+            // For the demo, just redirect to the home page
+            window.location.href = '/home';
+        }
+        
+        function registerUser() {
+            console.log("Registration attempt");
+            // In a real application, you would validate and send to the server
+            // For the demo, just redirect to the home page
+            window.location.href = '/home';
+        }
+        
+        // Close the modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('authModal')) {
+                document.getElementById('authModal').style.display = 'none';
+            }
+        });
+        
+        // Feature Tabs Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Feature tabs switching
+            const featureTabs = document.querySelectorAll('.feature-tab');
+            const featureContents = document.querySelectorAll('.feature-content');
+            
+            featureTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    featureTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Get the tab ID
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Hide all content sections
+                    featureContents.forEach(content => {
+                        content.classList.remove('active');
+                        
+                        // Apply animation to list items when shown
+                        const listItems = content.querySelectorAll('.feature-list li');
+                        listItems.forEach((item, index) => {
+                            item.style.setProperty('--i', index);
+                        });
+                    });
+                    
+                    // Show content for selected tab
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Apply initial animation to first tab's list items
+            const initialListItems = document.querySelector('.feature-content.active').querySelectorAll('.feature-list li');
+            initialListItems.forEach((item, index) => {
+                item.style.setProperty('--i', index);
+            });
+            
+            // Handle image loading
+            const featureImages = document.querySelectorAll('.feature-image img');
+            featureImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.opacity = 0.7;
+                });
+            });
+        });
+    </script>
+    <script src="/static/js/mobile.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>
